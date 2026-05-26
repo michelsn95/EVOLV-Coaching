@@ -1,0 +1,854 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EVOLV Coaching</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --black:   #0A0A0A;
+      --white:   #F7F6F3;
+      --green:   #8FA58E;
+      --green-d: #7a9179;
+      --card-bg: #ffffff;
+      --body-bg: #F7F6F3;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Figtree', sans-serif;
+      background: var(--body-bg);
+      color: var(--black);
+      overflow-x: hidden;
+    }
+
+    .disp { font-family: 'Barlow Condensed', sans-serif; }
+
+    /* ── UTILS ── */
+    .container { max-width: 1152px; margin: 0 auto; padding: 0 1.5rem; }
+    .green { color: var(--green); }
+    .text-muted { color: rgba(0,0,0,0.55); }
+    .overline {
+      font-size: .72rem;
+      text-transform: uppercase;
+      letter-spacing: .35em;
+      font-weight: 600;
+      color: var(--green);
+      display: block;
+      margin-bottom: 1.5rem;
+    }
+    a { text-decoration: none; color: inherit; }
+
+    /* ── NAVBAR ── */
+    nav {
+      position: fixed; top: 0; left: 0; width: 100%; z-index: 100;
+      background: rgba(247,246,243,.95);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(0,0,0,.07);
+    }
+    .nav-inner {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1rem 1.5rem;
+    }
+    .logo-word {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 1.5rem; font-weight: 800;
+      letter-spacing: .35em;
+    }
+    .logo-sub {
+      font-size: .6rem; text-transform: uppercase;
+      letter-spacing: .45em; color: rgba(0,0,0,.38);
+      display: block; margin-top: -.1rem;
+    }
+    .nav-links { display: flex; align-items: center; gap: 2rem; }
+    .nav-links a {
+      font-size: .875rem; font-weight: 500;
+      color: rgba(0,0,0,.6);
+      transition: color .15s;
+    }
+    .nav-links a:hover { color: var(--black); }
+    .btn-nav {
+      background: var(--black); color: #fff !important;
+      padding: .6rem 1.25rem; border-radius: .75rem;
+      font-size: .875rem; font-weight: 600;
+      transition: background .2s;
+    }
+    .btn-nav:hover { background: #222 !important; }
+
+    /* ── BUTTONS ── */
+    .btn-green {
+      display: inline-block;
+      background: var(--green); color: #fff;
+      padding: 1rem 2rem; border-radius: 1rem;
+      font-weight: 600; font-size: .9rem;
+      transition: background .2s, transform .1s;
+      cursor: pointer; border: none;
+    }
+    .btn-green:hover { background: var(--green-d); }
+    .btn-green:active { transform: scale(.98); }
+
+    .btn-outline-white {
+      display: inline-block;
+      border: 1px solid rgba(255,255,255,.2); color: #fff;
+      padding: 1rem 2rem; border-radius: 1rem;
+      font-weight: 500; font-size: .9rem;
+      transition: background .2s;
+      cursor: pointer; background: none;
+    }
+    .btn-outline-white:hover { background: rgba(255,255,255,.07); }
+
+    .btn-black {
+      display: inline-block;
+      background: var(--black); color: #fff;
+      padding: 1rem 2rem; border-radius: 1rem;
+      font-weight: 600; font-size: .9rem;
+      transition: background .2s;
+      cursor: pointer; border: none;
+    }
+    .btn-black:hover { background: #1f1f1f; }
+
+    /* ── HERO ── */
+    .hero {
+      background: var(--black); color: #fff;
+      padding: 9rem 1.5rem 6rem;
+      position: relative; overflow: hidden;
+    }
+    .hero-glow {
+      position: absolute; top: -20%; right: -10%;
+      width: 700px; height: 700px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(143,165,142,.13) 0%, transparent 65%);
+      pointer-events: none;
+    }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: .5rem;
+      border: 1px solid rgba(143,165,142,.35);
+      background: rgba(143,165,142,.1);
+      color: var(--green);
+      padding: .5rem 1rem; border-radius: 999px;
+      font-size: .85rem; margin-bottom: 2.5rem;
+    }
+    .hero-badge-dot {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: var(--green);
+      animation: pulse 2s ease infinite;
+    }
+    @keyframes pulse {
+      0%,100% { opacity: 1; } 50% { opacity: .4; }
+    }
+    .hero-h1 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: clamp(3.5rem, 11vw, 9.5rem);
+      font-weight: 800;
+      text-transform: uppercase;
+      line-height: .92;
+      letter-spacing: -.01em;
+      margin-bottom: 2.5rem;
+    }
+    .hero-bottom {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: end;
+      margin-top: 3rem;
+    }
+    .hero-p { color: rgba(255,255,255,.6); font-size: 1.1rem; line-height: 1.7; }
+    .hero-btns { display: flex; flex-wrap: wrap; gap: 1rem; }
+    .hero-stats {
+      margin-top: 5rem;
+      padding-top: 2.5rem;
+      border-top: 1px solid rgba(255,255,255,.1);
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+    }
+    .stat-title {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 1.9rem; font-weight: 700;
+      color: #fff; margin-bottom: .25rem;
+    }
+    .stat-desc { font-size: .82rem; color: rgba(255,255,255,.42); }
+
+    /* ── SECTION SHARED ── */
+    section { padding: 6rem 1.5rem; }
+    .section-h2 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 800;
+      text-transform: uppercase;
+      line-height: .92;
+      font-size: clamp(3rem, 8vw, 5.5rem);
+      margin-bottom: 2.5rem;
+    }
+    .section-p {
+      font-size: 1.05rem;
+      line-height: 1.75;
+      color: rgba(0,0,0,.65);
+    }
+
+    /* ── VOOR WIE ── */
+    .voor-wie { background: var(--body-bg); }
+    .voor-wie-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: center;
+    }
+    .voor-cards {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+    .voor-card {
+      background: #fff;
+      border: 1px solid rgba(0,0,0,.06);
+      border-radius: 1.5rem;
+      padding: 1.4rem;
+    }
+    .voor-card-title {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 1.05rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: .02em;
+      margin-bottom: .5rem;
+    }
+    .voor-card-desc { font-size: .82rem; color: rgba(0,0,0,.55); line-height: 1.6; }
+
+    /* ── ABOUT ── */
+    .about-section { background: var(--black); color: #fff; }
+    .about-section .section-p { color: rgba(255,255,255,.62); }
+    .about-section .bold { color: #fff; font-weight: 600; }
+
+    /* ── AANPAK ── */
+    .aanpak-section { background: var(--body-bg); }
+    .steps-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.25rem;
+    }
+    .step-card {
+      background: #fff;
+      border: 1px solid rgba(0,0,0,.06);
+      border-radius: 1.5rem;
+      padding: 1.75rem;
+      display: flex; flex-direction: column;
+    }
+    .step-num {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 3rem; font-weight: 800;
+      color: rgba(143,165,142,.35);
+      line-height: 1;
+      margin-bottom: 1.25rem;
+    }
+    .step-title {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 1.25rem; font-weight: 700;
+      text-transform: uppercase;
+      margin-bottom: .75rem;
+    }
+    .step-desc { font-size: .83rem; color: rgba(0,0,0,.6); line-height: 1.7; margin-top: auto; }
+
+    /* ── PACKAGES ── */
+    .packages-section { background: #fff; }
+    .pkg-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 4rem;
+      flex-wrap: wrap;
+      gap: 2rem;
+    }
+    .toggle-wrap { display: flex; flex-direction: column; align-items: flex-end; gap: .6rem; }
+    .toggle-btns {
+      display: flex;
+      background: var(--body-bg);
+      border-radius: 1rem;
+      padding: .35rem;
+      gap: .25rem;
+    }
+    .toggle-btn {
+      padding: .6rem 1.25rem;
+      border-radius: .75rem;
+      font-size: .875rem; font-weight: 500;
+      border: none; cursor: pointer;
+      display: flex; align-items: center; gap: .5rem;
+      background: none; color: rgba(0,0,0,.42);
+      transition: all .2s;
+    }
+    .toggle-btn.active {
+      background: #fff;
+      color: var(--black);
+      box-shadow: 0 1px 4px rgba(0,0,0,.1);
+    }
+    .badge-discount {
+      background: var(--green); color: #fff;
+      font-size: .7rem; font-weight: 700;
+      padding: .2rem .5rem; border-radius: 999px;
+    }
+    .toggle-note { font-size: .73rem; color: rgba(0,0,0,.36); }
+
+    .pkg-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      align-items: start;
+    }
+    .pkg-card {
+      border-radius: 1.75rem;
+      padding: 2rem;
+      display: flex; flex-direction: column;
+      position: relative;
+      transition: transform .25s, box-shadow .25s;
+    }
+    .pkg-card:hover { transform: translateY(-5px); box-shadow: 0 20px 60px rgba(0,0,0,.12); }
+    .pkg-card.light  { background: var(--body-bg); border: 1px solid rgba(0,0,0,.06); }
+    .pkg-card.dark   { background: var(--black); color: #fff; transform: scale(1.025); }
+    .pkg-card.dark:hover { transform: scale(1.025) translateY(-5px); }
+
+    .pkg-badge {
+      position: absolute; top: 1.5rem; right: 1.5rem;
+      background: var(--green); color: #fff;
+      font-size: .68rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: .06em;
+      padding: .35rem .75rem; border-radius: 999px;
+    }
+    .pkg-name {
+      font-size: .7rem; text-transform: uppercase;
+      letter-spacing: .25em; font-weight: 600;
+      color: rgba(0,0,0,.36); margin-bottom: 1rem;
+    }
+    .pkg-card.dark .pkg-name { color: rgba(255,255,255,.4); }
+    .pkg-price {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 4rem; font-weight: 800;
+      line-height: 1;
+    }
+    .pkg-per { font-size: .875rem; color: rgba(0,0,0,.38); margin-left: .35rem; }
+    .pkg-card.dark .pkg-per { color: rgba(255,255,255,.38); }
+    .pkg-desc {
+      font-size: .875rem; line-height: 1.6;
+      color: rgba(0,0,0,.55); margin: .75rem 0 1.75rem;
+    }
+    .pkg-card.dark .pkg-desc { color: rgba(255,255,255,.52); }
+    .pkg-features { list-style: none; display: flex; flex-direction: column; gap: .75rem; flex: 1; }
+    .pkg-features li { display: flex; gap: .7rem; align-items: flex-start; }
+    .pkg-check { color: var(--green); font-weight: 700; flex-shrink: 0; margin-top: .1rem; }
+    .pkg-feat-text { font-size: .85rem; line-height: 1.5; color: rgba(0,0,0,.68); }
+    .pkg-card.dark .pkg-feat-text { color: rgba(255,255,255,.75); }
+    .pkg-btn {
+      display: block; width: 100%;
+      padding: .9rem; border-radius: 1rem;
+      font-weight: 600; font-size: .875rem;
+      text-align: center; margin-top: 2rem;
+      border: none; cursor: pointer;
+      transition: background .2s;
+    }
+    .pkg-btn-dark { background: var(--black); color: #fff; }
+    .pkg-btn-dark:hover { background: #1f1f1f; }
+    .pkg-btn-green { background: var(--green); color: #fff; }
+    .pkg-btn-green:hover { background: var(--green-d); }
+    .pkg-footnote {
+      text-align: center; margin-top: 2.5rem;
+      font-size: .82rem; color: rgba(0,0,0,.36);
+    }
+
+    /* ── FAQ ── */
+    .faq-section { background: var(--body-bg); }
+    .faq-list { display: flex; flex-direction: column; gap: .75rem; max-width: 860px; }
+    .faq-item {
+      background: #fff;
+      border: 1px solid rgba(0,0,0,.06);
+      border-radius: 1.5rem;
+      overflow: hidden;
+    }
+    .faq-btn {
+      width: 100%; display: flex;
+      justify-content: space-between; align-items: center;
+      gap: 1rem;
+      padding: 1.5rem 1.75rem;
+      background: none; border: none;
+      cursor: pointer; text-align: left;
+    }
+    .faq-q {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 1.15rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: .02em;
+    }
+    .faq-icon {
+      color: var(--green); font-size: 1.75rem; line-height: 1;
+      transition: transform .22s; flex-shrink: 0;
+    }
+    .faq-icon.open { transform: rotate(45deg); }
+    .faq-answer {
+      max-height: 0; overflow: hidden;
+      transition: max-height .3s ease, padding .3s ease;
+    }
+    .faq-answer.open { max-height: 400px; }
+    .faq-answer-inner {
+      padding: 0 1.75rem 1.5rem;
+      font-size: .93rem; line-height: 1.75;
+      color: rgba(0,0,0,.62);
+    }
+
+    /* ── CONTACT ── */
+    .contact-section { background: var(--black); color: #fff; padding: 7rem 1.5rem; }
+    .contact-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 4rem; align-items: center;
+    }
+    .contact-h2 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: clamp(3.5rem, 9vw, 7rem);
+      font-weight: 800; text-transform: uppercase;
+      line-height: .92; margin-bottom: 1.75rem;
+    }
+    .contact-p { color: rgba(255,255,255,.52); font-size: 1.05rem; line-height: 1.75; max-width: 400px; }
+    .contact-box {
+      background: rgba(255,255,255,.05);
+      border: 1px solid rgba(255,255,255,.1);
+      border-radius: 1.75rem; padding: 2rem;
+    }
+    .contact-box-title {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 1.75rem; font-weight: 700;
+      text-transform: uppercase; margin-bottom: 1.5rem;
+    }
+    .contact-rows { display: flex; flex-direction: column; gap: .75rem; }
+    .contact-row {
+      display: flex; align-items: center; gap: 1rem;
+      padding: 1rem; border-radius: 1rem;
+      background: rgba(255,255,255,.04);
+      transition: background .2s;
+    }
+    .contact-row:hover { background: rgba(255,255,255,.09); }
+    .contact-row.highlight { background: var(--green); }
+    .contact-row.highlight:hover { background: var(--green-d); }
+    .contact-icon {
+      width: 2.5rem; height: 2.5rem; border-radius: 50%;
+      background: var(--green); color: #fff;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 700; font-size: .95rem; flex-shrink: 0;
+    }
+    .contact-row.highlight .contact-icon { background: rgba(255,255,255,.2); }
+    .contact-label { font-size: .68rem; text-transform: uppercase; letter-spacing: .1em; color: rgba(255,255,255,.35); margin-bottom: .2rem; }
+    .contact-row.highlight .contact-label { color: rgba(255,255,255,.65); }
+    .contact-val { font-size: .9rem; font-weight: 500; color: #fff; }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--black);
+      border-top: 1px solid rgba(255,255,255,.06);
+      padding: 1.75rem 1.5rem;
+    }
+    .footer-inner {
+      display: flex; align-items: center;
+      justify-content: space-between; flex-wrap: wrap; gap: 1rem;
+    }
+    .footer-logo {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 1.2rem; font-weight: 800;
+      letter-spacing: .35em; color: #fff;
+    }
+    .footer-logo span {
+      font-family: 'Figtree', sans-serif;
+      font-weight: 400; letter-spacing: 0;
+      font-size: .82rem; color: rgba(255,255,255,.3); margin-left: .25rem;
+    }
+    .footer-copy { font-size: .78rem; color: rgba(255,255,255,.22); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .hero-bottom    { grid-template-columns: 1fr; }
+      .hero-stats     { grid-template-columns: 1fr 1fr; }
+      .voor-wie-grid  { grid-template-columns: 1fr; gap: 3rem; }
+      .steps-grid     { grid-template-columns: 1fr 1fr; }
+      .pkg-grid       { grid-template-columns: 1fr; }
+      .pkg-card.dark  { transform: scale(1); }
+      .pkg-card.dark:hover { transform: translateY(-5px); }
+      .contact-grid   { grid-template-columns: 1fr; }
+      .pkg-header     { flex-direction: column; align-items: flex-start; }
+      .toggle-wrap    { align-items: flex-start; }
+    }
+    @media (max-width: 600px) {
+      .nav-links      { display: none; }
+      .hero-stats     { grid-template-columns: 1fr; }
+      .steps-grid     { grid-template-columns: 1fr; }
+      .voor-cards     { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- NAVBAR -->
+  <nav>
+    <div class="container nav-inner">
+      <div>
+        <span class="logo-word">EVOLV</span>
+        <span class="logo-sub">Coaching</span>
+      </div>
+      <div class="nav-links">
+        <a href="#over">Over</a>
+        <a href="#aanpak">Aanpak</a>
+        <a href="#pakketten">Pakketten</a>
+        <a href="#faq">FAQ</a>
+        <a href="#contact" class="btn-nav">Start nu</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-glow"></div>
+    <div class="container">
+      <div class="hero-badge">
+        <span class="hero-badge-dot"></span>
+        Online coaching — Nederland &amp; België
+      </div>
+
+      <h1 class="hero-h1">
+        Jij traint al.<br>
+        <span class="green">Nu ga je</span><br>
+        écht verder.
+      </h1>
+
+      <div class="hero-bottom">
+        <p class="hero-p">
+          Je kent de oefeningen. Je hebt de basis. Maar je blijft hangen op hetzelfde niveau.
+          EVOLV Coaching geeft je de structuur, accountability en het plan om door te breken.
+        </p>
+        <div class="hero-btns">
+          <a href="#contact" class="btn-green">Plan een kennismaking</a>
+          <a href="#pakketten" class="btn-outline-white">Bekijk pakketten</a>
+        </div>
+      </div>
+
+      <div class="hero-stats">
+        <div>
+          <p class="stat-title">14 jaar</p>
+          <p class="stat-desc">Eigen ervaring in fitness &amp; voeding</p>
+        </div>
+        <div>
+          <p class="stat-title">3 doelen</p>
+          <p class="stat-desc">Afvallen · Droogtrainen · Spiermassa</p>
+        </div>
+        <div>
+          <p class="stat-title">Data-gestuurd</p>
+          <p class="stat-desc">Wekelijkse check-ins &amp; gerichte aanpassingen</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- VOOR WIE -->
+  <section class="voor-wie" id="over">
+    <div class="container">
+      <div class="voor-wie-grid">
+        <div>
+          <span class="overline">Voor wie</span>
+          <h2 class="section-h2">Je traint al.<br>Maar je<br>komt niet<br>verder.</h2>
+          <div class="section-p" style="display:flex;flex-direction:column;gap:1rem;">
+            <p>EVOLV Coaching is voor sporters die al een tijdje in de sportschool staan — die weten wat een squat en progressieve overload is, maar vastlopen op een bepaald niveau.</p>
+            <p>Je werkt hard. Maar zonder het juiste plan, de juiste structuur en echte begeleiding kom je er niet doorheen.</p>
+            <p><strong style="color:var(--black)">Dát is precies het gat dat EVOLV Coaching dicht.</strong></p>
+          </div>
+        </div>
+        <div class="voor-cards">
+          <div class="voor-card">
+            <p class="voor-card-title">Al &gt; 1 jaar actief</p>
+            <p class="voor-card-desc">Je hebt een solide basis in de sportschool opgebouwd</p>
+          </div>
+          <div class="voor-card">
+            <p class="voor-card-title">Je hebt een doel</p>
+            <p class="voor-card-desc">Afvallen, droogtrainen of aankomen in spiermassa</p>
+          </div>
+          <div class="voor-card">
+            <p class="voor-card-title">Je loopt vast</p>
+            <p class="voor-card-desc">Geen progressie meer of onzeker welke richting op</p>
+          </div>
+          <div class="voor-card">
+            <p class="voor-card-title">Je wil meer</p>
+            <p class="voor-card-desc">Een concreet plan, structuur en wekelijkse begeleiding</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="about-section">
+    <div class="container">
+      <span class="overline">Over EVOLV</span>
+      <h2 class="section-h2" style="color:#fff;">Meer dan<br>alleen een schema.</h2>
+      <div style="max-width:680px;display:flex;flex-direction:column;gap:1.1rem;">
+        <p class="section-p">Ik fitness al sinds mijn 16e en heb in die 14 jaar veel geëxperimenteerd — met training, voeding, verschillende methoden en mezelf als testpersoon. Ik heb met meerdere personal trainers gewerkt en mij naast die ervaring zelfstandig verdiept in alles rondom training en voeding.</p>
+        <p class="section-p">EVOLV Coaching is ontstaan omdat ik zag hoe veel sporters vastlopen — niet door gebrek aan inzet, maar door gebrek aan een goed plan en iemand die met ze meekijkt.</p>
+        <p class="section-p bold">Mijn taak is het gat dichten tussen jouw inzet en het resultaat dat je verdient.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- AANPAK -->
+  <section class="aanpak-section" id="aanpak">
+    <div class="container">
+      <span class="overline">De aanpak</span>
+      <h2 class="section-h2">Zo werkt<br>EVOLV.</h2>
+      <div class="steps-grid">
+        <div class="step-card">
+          <span class="step-num">01</span>
+          <p class="step-title">Intake &amp; call</p>
+          <p class="step-desc">Je vult een uitgebreid formulier in over je doelen, leefstijl, voeding en trainingsgeschiedenis. Daarna volgt een call van 45–60 minuten om alles samen door te nemen.</p>
+        </div>
+        <div class="step-card">
+          <span class="step-num">02</span>
+          <p class="step-title">Persoonlijk plan</p>
+          <p class="step-desc">Op basis van de intake maak ik een volledig op maat gemaakt voedings- én trainingsschema. Geen templates — afgestemd op jouw specifieke situatie.</p>
+        </div>
+        <div class="step-card">
+          <span class="step-num">03</span>
+          <p class="step-title">Wekelijkse check-in</p>
+          <p class="step-desc">Elke week vul je een Excel-bestand in: gewicht, lichaamsomtrekken, stappen, slaap en je trainingsdagboek. Ik analyseer de data en geef je concrete feedback.</p>
+        </div>
+        <div class="step-card">
+          <span class="step-num">04</span>
+          <p class="step-title">Bijsturen &amp; groeien</p>
+          <p class="step-desc">Op basis van jouw data pas ik je plan aan — wekelijks, tweewekelijks of maandelijks afhankelijk van je pakket. Zo blijf je altijd de goede kant op gaan.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PACKAGES -->
+  <section class="packages-section" id="pakketten">
+    <div class="container">
+      <div class="pkg-header">
+        <div>
+          <span class="overline">Pakketten</span>
+          <h2 class="section-h2" style="margin-bottom:0">Kies jouw<br>traject.</h2>
+        </div>
+        <div class="toggle-wrap">
+          <div class="toggle-btns">
+            <button class="toggle-btn active" onclick="setBilling('3')" id="btn3">3 maanden</button>
+            <button class="toggle-btn" onclick="setBilling('6')" id="btn6">
+              6 maanden <span class="badge-discount">−€10/m</span>
+            </button>
+          </div>
+          <p class="toggle-note" id="toggle-note">Minimaal 3 maanden, daarna maandelijks opzegbaar</p>
+        </div>
+      </div>
+
+      <div class="pkg-grid">
+        <!-- BASIC -->
+        <div class="pkg-card light">
+          <p class="pkg-name">Basic</p>
+          <div>
+            <span class="pkg-price" id="price-basic">€99</span><span class="pkg-per">/maand</span>
+          </div>
+          <p class="pkg-desc">Voor zelfstandige sporters die structuur willen.</p>
+          <ul class="pkg-features">
+            <li><span class="pkg-check">✓</span><span class="pkg-feat-text">Uitgebreide intake (45–60 min)</span></li>
+            <li><span class="pkg-check">✓</span><span class="pkg-feat-text">Persoonlijk voedings- &amp; trainingsschema</span></li>
+            <li><span class="pkg-check">✓</span><span class="pkg-feat-text">Maandelijkse schema-aanpassing (1× p/m)</span></li>
+            <li><span class="pkg-check">✓</span><span class="pkg-feat-text">Wekelijkse check-in via Excel</span></li>
+            <li><span class="pkg-check">✓</span><span class="pkg-feat-text">Wekelijkse feedback per e-mail</span></li>
+            <li><span class="pkg-check">✓</span><span class="pkg-feat-text">Vragen stellen via mail bij check-in</span></li>
+          </ul>
+          <a href="#contact" class="pkg-btn pkg-btn-dark">Start met BASIC</a>
+        </div>
+
+        <!-- PREMIUM -->
+        <div class="pkg-card dark">
+          <span class="pkg-badge">Meest gekozen</span>
+          <p class="pkg-name">Premium</p>
+          <div>
+            <span class="pkg-price" id="price-premium">€149</span><span class="pkg-per">/maand</span>
+          </div>
+          <p class="pkg-desc">Voor wie meer begeleiding en sneller schakelen wil.</p>
+          <ul class="pkg-features">
+            <li><span class="pkg-check">✓</span><span class="pkg-feat-text">Alles van BASIC</span></li>
+            <li><span class="pkg-check">✓</span><span class="pkg-feat-text">Schema-aanpassing elke 2 weken (2× p/m)</span></li>
+            <li><span class="pkg-check">✓</span><span class="pkg-feat-text">WhatsApp-support (reactie binnen 24 uur)</span></li>
+            <li><span class="pkg-check">✓</span><span class="pkg-feat-text">Tussentijds vragen stellen</span></li>
+            <li><span class="pkg-check">✓</span><span class="pkg-feat-text">Meer flexibiliteit in voeding &amp; training</span></li>
+          </ul>
+          <a href="#contact" class="pkg-btn pkg-btn-green">Start met PREMIUM</a>
+        </div>
+
+        <!-- ELITE -->
+        <div class="pkg-card light">
+          <p class="pkg-name">Elite</p>
+          <div>
+            <span class="pkg-price" id="price-elite">€199</span><span class="pkg-per">/maand</span>
+          </div>
+          <p class="pkg-desc">Voor maximale progressie en betrokken coaching.</p>
+          <ul class="pkg-features">
+            <li><span class="pkg-check">✓</span><span class="pkg-feat-text">Alles van PREMIUM</span></li>
+            <li><span class="pkg-check">✓</span><span class="pkg-feat-text">Wekelijkse schema-aanpassingen indien nodig</span></li>
+            <li><span class="pkg-check">✓</span><span class="pkg-feat-text">Maandelijkse videocall (20–30 min)</span></li>
+            <li><span class="pkg-check">✓</span><span class="pkg-feat-text">Prioriteit bij WhatsApp</span></li>
+            <li><span class="pkg-check">✓</span><span class="pkg-feat-text">Actief meedenken &amp; bijsturen</span></li>
+          </ul>
+          <a href="#contact" class="pkg-btn pkg-btn-dark">Start met ELITE</a>
+        </div>
+      </div>
+
+      <p class="pkg-footnote">Twijfel je welk pakket bij je past? Plan een gratis kennismakingsgesprek en we kijken het samen door.</p>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="faq-section" id="faq">
+    <div class="container">
+      <span class="overline">FAQ</span>
+      <h2 class="section-h2">Veelgestelde<br>vragen.</h2>
+      <div class="faq-list">
+
+        <div class="faq-item">
+          <button class="faq-btn" onclick="toggleFaq(this)">
+            <span class="faq-q">Heb ik al ervaring nodig?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p class="faq-answer-inner">Ja. EVOLV Coaching is specifiek voor sporters die al een tijdje trainen en de basis kennen — oefeningen, uitvoering en hoe de sportschool werkt. Ik geef geen fysieke begeleiding ter plaatse, dus je moet zelfstandig kunnen trainen. Beginners zijn op dit moment niet de doelgroep.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-btn" onclick="toggleFaq(this)">
+            <span class="faq-q">Hoe lang duurt een traject minimaal?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p class="faq-answer-inner">Elk traject heeft een minimale looptijd van 3 maanden. Je hebt die tijd nodig om in het ritme te komen, alles te optimaliseren en je eerste echte resultaten te boeken. Na 3 maanden is het traject maandelijks opzegbaar.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-btn" onclick="toggleFaq(this)">
+            <span class="faq-q">Wat levert het op als ik voor 6 maanden kies?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p class="faq-answer-inner">Als je direct kiest voor een looptijd van minimaal 6 maanden, krijg je €10 korting per maand. Bij het ELITE-pakket bespaart dat €60 over de looptijd. Na 6 maanden is het ook maandelijks opzegbaar.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-btn" onclick="toggleFaq(this)">
+            <span class="faq-q">Hoe werkt de wekelijkse check-in?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p class="faq-answer-inner">Je krijgt een Excel-bestand dat ik zelf heb opgesteld. Daarin vul je wekelijks je dagelijks gewicht en wekelijks gemiddelde in, de meting van je lichaamsomtrekken op verschillende plekken, je dagelijkse stappen, slaapuren en je trainingsdagboek. Op basis van die data geef ik je elke week gerichte feedback.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-btn" onclick="toggleFaq(this)">
+            <span class="faq-q">Moet ik streng diëten?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p class="faq-answer-inner">Nee. De aanpak is realistisch en afgestemd op jouw leven, voorkeuren en situatie. Geen extreme tekorten of onhoudbare diëten. Wel duidelijke structuur en kaders waarbinnen je stap voor stap resultaat boekt.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-btn" onclick="toggleFaq(this)">
+            <span class="faq-q">Wat is het verschil tussen de pakketten qua contact?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p class="faq-answer-inner">Bij BASIC stel je vragen via mail bij je wekelijkse check-in. Bij PREMIUM en ELITE kun je ook tussentijds vragen stellen via WhatsApp — bij ELITE met prioriteit. Het ELITE-pakket heeft ook een maandelijkse videocall voor diepgaandere evaluatie en bijsturing.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="contact-section" id="contact">
+    <div class="container">
+      <div class="contact-grid">
+        <div>
+          <span class="overline">Start jouw traject</span>
+          <h2 class="contact-h2">Stop met<br>hetzelfde<br>doen.</h2>
+          <p class="contact-p">Als je al maanden of jaren hetzelfde resultaat boekt, ontbreekt er iets in je aanpak. Plan een gratis kennismakingsgesprek en ontdek wat dat is.</p>
+        </div>
+        <div class="contact-box">
+          <p class="contact-box-title">Neem contact op</p>
+          <div class="contact-rows">
+            <a href="mailto:info@evolvcoaching.nl" class="contact-row">
+              <div class="contact-icon">@</div>
+              <div>
+                <p class="contact-label">E-mail</p>
+                <p class="contact-val">info@evolvcoaching.nl</p>
+              </div>
+            </a>
+            <a href="#" class="contact-row">
+              <div class="contact-icon">↗</div>
+              <div>
+                <p class="contact-label">WhatsApp</p>
+                <p class="contact-val">Stuur een bericht</p>
+              </div>
+            </a>
+            <a href="#pakketten" class="contact-row highlight">
+              <div class="contact-icon">→</div>
+              <div>
+                <p class="contact-label">Of direct starten</p>
+                <p class="contact-val">Bekijk de pakketten</p>
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container footer-inner">
+      <span class="footer-logo">EVOLV <span>Coaching</span></span>
+      <p class="footer-copy">© 2025 EVOLV Coaching — Alle rechten voorbehouden</p>
+    </div>
+  </footer>
+
+  <script>
+    const prices = { basic: [99, 89], premium: [149, 139], elite: [199, 189] };
+    let currentBilling = '3';
+
+    function setBilling(val) {
+      currentBilling = val;
+      const idx = val === '6' ? 1 : 0;
+      document.getElementById('price-basic').textContent   = '€' + prices.basic[idx];
+      document.getElementById('price-premium').textContent = '€' + prices.premium[idx];
+      document.getElementById('price-elite').textContent   = '€' + prices.elite[idx];
+      document.getElementById('btn3').classList.toggle('active', val === '3');
+      document.getElementById('btn6').classList.toggle('active', val === '6');
+      document.getElementById('toggle-note').textContent = val === '6'
+        ? 'Minimaal 6 maanden, daarna maandelijks opzegbaar'
+        : 'Minimaal 3 maanden, daarna maandelijks opzegbaar';
+    }
+
+    function toggleFaq(btn) {
+      const answer = btn.nextElementSibling;
+      const icon   = btn.querySelector('.faq-icon');
+      const isOpen = answer.classList.contains('open');
+
+      // close all
+      document.querySelectorAll('.faq-answer').forEach(a => a.classList.remove('open'));
+      document.querySelectorAll('.faq-icon').forEach(i => i.classList.remove('open'));
+
+      if (!isOpen) {
+        answer.classList.add('open');
+        icon.classList.add('open');
+      }
+    }
+  </script>
+</body>
+</html>
