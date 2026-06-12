@@ -67,6 +67,12 @@
       letter-spacing: .45em; color: rgba(0,0,0,.38);
       display: block; margin-top: -.1rem;
     }
+    /* logo image replacements */
+    .brand { display: inline-flex; align-items: center; gap: .5rem; text-decoration: none; color: inherit; }
+    .site-logo { height: 44px; width: auto; display: block; }
+    .footer-logo { display: inline-flex; align-items: center; gap: .5rem; color: #fff; text-decoration: none; }
+    .footer-logo-img { height: 28px; width: auto; display: block; }
+
     .nav-links { display: flex; align-items: center; gap: 2rem; }
     .nav-links a {
       font-size: .875rem; font-weight: 500;
@@ -489,8 +495,10 @@
   <nav>
     <div class="container nav-inner">
       <div>
-        <span class="logo-word">EVOLV</span>
-        <span class="logo-sub">Coaching</span>
+        <a href="#top" class="brand">
+          <img src="assets/logo.svg" alt="EVOLV Coaching logo" class="site-logo" />
+          <span class="logo-sub">Coaching</span>
+        </a>
       </div>
       <div class="nav-links">
         <a href="#over">Over</a>
@@ -554,7 +562,7 @@
           <span class="overline">Voor wie</span>
           <h2 class="section-h2">Een plan<br>dat écht op<br>jou past.</h2>
           <div class="section-p" style="display:flex;flex-direction:column;gap:1rem;">
-            <p>EVOLV Coaching is voor iedereen die serieus aan de slag wil met zijn of haar lichaam. Of je nu al een tijdje sport of net wat basiservaring hebt — zolang je zelfstandig kunt trainen, kun je starten.</p>
+            <p>EVOLV Coaching is voor iedereen die serieus aan de slag wil met zijn of haar lichaam. Of je nu al een tijdje sport of net wat basiservaring hebt — zolang je zelfstandig kunt trai[...]
             <p>Wat je níet hoeft te weten: voedingsleer, calorieën tellen, trainingstechnieken of schema's. Dat is precies waar ik voor ben.</p>
             <p><strong style="color:var(--black)">Jij levert de inzet. Ik lever het plan.</strong></p>
           </div>
@@ -587,8 +595,8 @@
       <span class="overline">Over EVOLV</span>
       <h2 class="section-h2" style="color:#fff;">Meer dan<br>alleen een schema.</h2>
       <div style="max-width:680px;display:flex;flex-direction:column;gap:1.1rem;">
-        <p class="section-p">Ik heb jaren in de sportschool gestaan, met meerdere personal trainers gewerkt en mezelf uitgebreid verdiept in training en voeding — door te studeren, te experimenteren en alles op mezelf uit te testen. Die combinatie van kennis en praktijkervaring is de basis van EVOLV Coaching.</p>
-        <p class="section-p">EVOLV Coaching is ontstaan omdat ik zag hoe veel sporters vastlopen — niet door gebrek aan inzet, maar door gebrek aan een goed plan en iemand die écht met ze meekijkt.</p>
+        <p class="section-p">Ik heb jaren in de sportschool gestaan, met meerdere personal trainers gewerkt en mezelf uitgebreid verdiept in training en voeding — door te studeren, te experimen[...]
+        <p class="section-p">EVOLV Coaching is ontstaan omdat ik zag hoe veel sporters vastlopen — niet door gebrek aan inzet, maar door gebrek aan een goed plan en iemand die écht met ze meek[...]
         <p class="section-p bold">Mijn taak is het gat dichten tussen jouw inzet en het resultaat dat je verdient.</p>
       </div>
 
@@ -623,7 +631,7 @@
         <div class="step-card">
           <span class="step-num">01</span>
           <p class="step-title">Intake &amp; call</p>
-          <p class="step-desc">Je vult een uitgebreid formulier in over je doelen, leefstijl, voeding en trainingsgeschiedenis. Daarna volgt een call van 45–60 minuten om alles samen door te nemen.</p>
+          <p class="step-desc">Je vult een uitgebreid formulier in over je doelen, leefstijl, voeding en trainingsgeschiedenis. Daarna volgt een call van 45–60 minuten om alles samen door te ne[...]
         </div>
         <div class="step-card">
           <span class="step-num">02</span>
@@ -633,7 +641,7 @@
         <div class="step-card">
           <span class="step-num">03</span>
           <p class="step-title">Wekelijkse check-in</p>
-          <p class="step-desc">Elke week registreer je je voortgang via een eenvoudig overzicht: gewicht, lichaamsomtrekken, stappen, slaap en je trainingsdagboek. Ik analyseer alles en geef je concrete, persoonlijke feedback.</p>
+          <p class="step-desc">Elke week registreer je je voortgang via een eenvoudig overzicht: gewicht, lichaamsomtrekken, stappen, slaap en je trainingsdagboek. Ik analyseer alles en geef je c[...]
         </div>
         <div class="step-card">
           <span class="step-num">04</span>
@@ -710,7 +718,7 @@
           <ul class="pkg-features">
             <li><span class="pkg-check">✓</span><span class="pkg-feat-text">Alles van PREMIUM</span></li>
             <li><span class="pkg-check">✓</span><span class="pkg-feat-text">Wekelijkse schema-aanpassingen indien nodig</span></li>
-            <li><span class="pkg-check">✓</span><span class="pkg-feat-text">Maandelijkse videocall (20–30 min)</span></li>
+            <li><span class="pkg-check">✓</span><span class="pkg-feat-text">Maandlijkse videocall (20–30 min)</span></li>
             <li><span class="pkg-check">✓</span><span class="pkg-feat-text">Prioriteit bij WhatsApp</span></li>
             <li><span class="pkg-check">✓</span><span class="pkg-feat-text">Actief meedenken &amp; bijsturen</span></li>
           </ul>
@@ -735,7 +743,7 @@
             <span class="faq-icon">+</span>
           </button>
           <div class="faq-answer">
-            <p class="faq-answer-inner">Niet per se. Het is handig als je al eens in een sportschool hebt gestaan en de weg een beetje kent — omdat ik geen fysieke begeleiding ter plaatse geef. Maar je hoeft echt geen expert te zijn. Je hoeft geen voedingsleer te kennen, geen schema's te begrijpen of jarenlang getraind te hebben. Dat is precies wat ik voor je regel.</p>
+            <p class="faq-answer-inner">Niet per se. Het is handig als je al eens in een sportschool hebt gestaan en de weg een beetje kent — omdat ik geen fysieke begeleiding ter plaatse geef.[...]
           </div>
         </div>
 
@@ -745,7 +753,7 @@
             <span class="faq-icon">+</span>
           </button>
           <div class="faq-answer">
-            <p class="faq-answer-inner">Elk traject heeft een minimale looptijd van 3 maanden. Je hebt die tijd nodig om in het ritme te komen, alles te optimaliseren en je eerste echte resultaten te boeken. Na 3 maanden is het traject maandelijks opzegbaar.</p>
+            <p class="faq-answer-inner">Elk traject heeft een minimale looptijd van 3 maanden. Je hebt die tijd nodig om in het ritme te komen, alles te optimaliseren en je eerste echte resultate[...]
           </div>
         </div>
 
@@ -755,7 +763,7 @@
             <span class="faq-icon">+</span>
           </button>
           <div class="faq-answer">
-            <p class="faq-answer-inner">Als je direct kiest voor een looptijd van minimaal 6 maanden, krijg je €10 korting per maand. Bij het ELITE-pakket bespaart dat €60 over de looptijd. Na 6 maanden is het ook maandelijks opzegbaar.</p>
+            <p class="faq-answer-inner">Als je direct kiest voor een looptijd van minimaal 6 maanden, krijg je €10 korting per maand. Bij het ELITE-pakket bespaart dat €60 over de looptijd. N[...]
           </div>
         </div>
 
@@ -765,7 +773,7 @@
             <span class="faq-icon">+</span>
           </button>
           <div class="faq-answer">
-            <p class="faq-answer-inner">Je krijgt van mij een eenvoudig overzicht dat je wekelijks invult. Daarin houd je bij: je dagelijks gewicht en het wekelijkse gemiddelde, de meting van je lichaamsomtrekken op meerdere plekken, je dagelijkse stappen, slaapuren en je trainingsdagboek. Het kost je per week maar een paar minuten — en op basis van die gegevens geef ik je elke week gerichte feedback en bijsturing.</p>
+            <p class="faq-answer-inner">Je krijgt van mij een eenvoudig overzicht dat je wekelijks invult. Daarin houd je bij: je dagelijks gewicht en het wekelijkse gemiddelde, de meting van je [...]
           </div>
         </div>
 
@@ -775,7 +783,7 @@
             <span class="faq-icon">+</span>
           </button>
           <div class="faq-answer">
-            <p class="faq-answer-inner">Nee. De aanpak is realistisch en afgestemd op jouw leven, voorkeuren en situatie. Geen extreme tekorten of onhoudbare diëten. Wel duidelijke structuur en kaders waarbinnen je stap voor stap resultaat boekt.</p>
+            <p class="faq-answer-inner">Nee. De aanpak is realistisch en afgestemd op jouw leven, voorkeuren en situatie. Geen extreme tekorten of onhoudbare diëten. Wel duidelijke structuur en [...]
           </div>
         </div>
 
@@ -785,7 +793,7 @@
             <span class="faq-icon">+</span>
           </button>
           <div class="faq-answer">
-            <p class="faq-answer-inner">Bij BASIC stel je vragen via mail bij je wekelijkse check-in. Bij PREMIUM en ELITE kun je ook tussentijds vragen stellen via WhatsApp — bij ELITE met prioriteit. Het ELITE-pakket heeft ook een maandelijkse videocall voor diepgaandere evaluatie en bijsturing.</p>
+            <p class="faq-answer-inner">Bij BASIC stel je vragen via mail bij je wekelijkse check-in. Bij PREMIUM en ELITE kun je ook tussentijds vragen stellen via WhatsApp — bij ELITE met pri[...]
           </div>
         </div>
 
@@ -828,7 +836,10 @@
   <!-- FOOTER -->
   <footer>
     <div class="container footer-inner">
-      <span class="footer-logo">EVOLV <span>Coaching</span></span>
+      <a href="#top" class="footer-logo">
+        <img src="assets/logo.svg" alt="EVOLV Coaching logo" class="footer-logo-img" />
+        <span>Coaching</span>
+      </a>
       <p class="footer-copy">© 2025 EVOLV Coaching — Alle rechten voorbehouden</p>
     </div>
   </footer>
