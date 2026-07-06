@@ -1,0 +1,27 @@
+{
+  "name": "evolv-coaching",
+  "version": "1.0.0",
+  "description": "EVOLV Coaching - Online Personal Trainer",
+  "type": "module",
+  "scripts": {
+    "build": "node build.js",
+    "test": "echo \"No tests specified\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/michelsn95/EVOLV-Coaching.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/michelsn95/EVOLV-Coaching/issues"
+  },
+  "homepage": "https://github.com/michelsn95/EVOLV-Coaching#readme",
+  "dependencies": {
+    "@vercel/speed-insights": "^2.0.0"
+  },
+  "devDependencies": {
+    "esbuild": "^0.28.1"
+  }
+}
