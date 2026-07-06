@@ -1,0 +1,20 @@
+# Dependencies
+node_modules/
+
+# Build outputs (these should be built on deployment)
+# Uncomment the line below if you want to build locally and commit dist
+# dist/
+
+# Logs
+*.log
+npm-debug.log*
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
